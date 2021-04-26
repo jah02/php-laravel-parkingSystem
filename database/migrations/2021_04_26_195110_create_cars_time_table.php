@@ -16,9 +16,9 @@ class CreateCarsTimeTable extends Migration
         Schema::create('cars_time', function (Blueprint $table) {
             $table->id();
             $table->integer('car_id')->nullable(false);
-            $table->dateTime('arrival_time')->nullable(true);
+            $table->dateTime('arrival_time')->nullable(false);
             $table->dateTime('departure_time')->nullable(true);
-            $table->decimal('cost');
+            $table->decimal('cost')->nullable(true);
             $table->timestamps();
         });
     }

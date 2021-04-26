@@ -1,4 +1,6 @@
+@section('stylesheets')
 <link href="{{ asset('assets/css/layout/navbar.css') }}" rel="stylesheet">
+@endsection
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <span class="navbar-brand mb-0 h1 font-weight-bold mr-3" id="textBrand">ParkingSystem</span>
@@ -8,8 +10,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item mr-3">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="#">Parking</a>
             </li>
+            @auth
+                <li>
+                    <a class="nav-link" href="#">Add vehicle</a>
+                </li>
+            @endauth
         </ul>
         <ul class="navbar-nav ml-auto mr-5">
             <li class="nav-item dropdown ml-lg-auto">
