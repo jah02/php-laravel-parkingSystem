@@ -13,10 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/welcome', function () {
-   return 'Hello world!';
-});
+Route::get('/', [\App\Http\Controllers\MainController::class, 'index']);
