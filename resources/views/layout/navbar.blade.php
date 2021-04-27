@@ -1,6 +1,4 @@
-@section('stylesheets')
 <link href="{{ asset('assets/css/layout/navbar.css') }}" rel="stylesheet">
-@endsection
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <span class="navbar-brand mb-0 h1 font-weight-bold mr-3" id="textBrand">ParkingSystem</span>
