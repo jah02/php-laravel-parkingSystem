@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MainController::class, 'index'])->name('index');
+Route::get('/', [MainController::class, 'index'])
+                ->name('index')
+                ->middleware('auth');
+
+Route::get('/cars/add', [CarController::class, 'index'])
+                ->middleware('auth');
+Route::post('/cars/add', [CarController::class, 'addCar'])->name('add_car')
+                ->middleware('auth');
 
 require __DIR__.'/auth.php';

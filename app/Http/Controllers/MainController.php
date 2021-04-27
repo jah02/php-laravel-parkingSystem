@@ -12,7 +12,7 @@ class MainController extends Controller
     {
         $parkedVehicles = DB::table('cars')
             ->join('cars_time', function ($join) {
-                $join->on('cars.id', '=', 'cars_time.id')
+                $join->on('cars.id', '=', 'cars_time.car_id')
                     ->where('cars_time.departure_time', '=', null);
             })
             ->get();

@@ -24,7 +24,7 @@
                     <tr>
                         <th scope="col">License plate</th>
                         <th scope="col">Vehicle type</th>
-                        <th scope="col">Arrive time</th>
+                        <th scope="col">Arrival time</th>
                         @auth <th scope="col">Action</th> @endauth
                     </tr>
                     </thead>
