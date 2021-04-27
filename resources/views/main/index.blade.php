@@ -17,7 +17,9 @@
                         <a class="nav-link" href="#">History</a>
                     </li>
                 </ul>
-                <table class="table">
+
+                <!-- Main table -->
+                <table class="table" id="tableMain">
                     <thead>
                     <tr>
                         <th scope="col">License plate</th>
@@ -42,6 +44,36 @@
                     @endforeach
                     </tbody>
                 </table>
+
+                <!-- History table -->
+                <table class="table d-none" id="tableHistorical">
+                    <thead>
+                    <tr>
+                        <th scope="col">License plate</th>
+                        <th scope="col">Vehicle type</th>
+                        <th scope="col">Arrive time</th>
+                        <th scope="col">Departure time</th>
+                        @auth <th scope="col">Action</th> @endauth
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($parkedVehicles as $vehicle)
+                        <tr>
+                            <td>{{ $vehicle->license_plate }}</td>
+                            <td>{{ $vehicle->vehicle_type }}</td>
+                            <td>{{ $vehicle->arrival_time }}</td>
+                            <td>{{ $vehicle->departure_time }}</td>
+                            @auth
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-info">Details</a>
+                                    <a href="#" class="btn btn-sm btn-warning">Update</a>
+                                </td>
+                            @endauth
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>
