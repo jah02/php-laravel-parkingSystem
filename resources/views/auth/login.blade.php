@@ -22,7 +22,7 @@
     </div>
     <div class="form-group mb-4">
         <input type="checkbox" name="remember-me">
-        <label for="remember-me">Remember me</label>
+        <label for="remember_token">Remember me</label>
     </div>
     @csrf
     <div class="text-center">

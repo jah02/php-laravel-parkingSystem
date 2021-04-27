@@ -36,7 +36,7 @@
                         <td>{{ $vehicle->arrival_time }}</td>
                         @auth
                             <td>
-                                <a href="#" class="btn btn-sm btn-info">Details</a>
+                                <a href="{{ route('details', ['id' => $vehicle->car_id]) }}" class="btn btn-sm btn-info">Details</a>
                                 <a href="#" class="btn btn-sm btn-warning">Update</a>
                             </td>
                         @endauth

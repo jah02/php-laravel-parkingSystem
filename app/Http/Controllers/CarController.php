@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\CarTime;
+use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -23,7 +24,6 @@ class CarController extends Controller
      */
     public function addCar(Request $request)
     {
-
         $request->validate([
             'vehicleType' => [
                 'required',
@@ -35,7 +35,8 @@ class CarController extends Controller
                 'max:255'
             ],
             'arrivalTime' => [
-                'required'
+                'required',
+                'after_or_equal:now'
             ]
         ]);
 
@@ -46,12 +47,28 @@ class CarController extends Controller
         $car->save();
 
         $carTime = new CarTime();
-        //$carTime->arrival_time = DateTime::createFromFormat('Y-m-d H:i:s', $validatedData['arrivalTime']);
         $carTime->car_id = $car->id;
         $carTime->arrival_time = $request->arrivalTime;
         $carTime->save();
 
         return redirect()->route('index');
+    }
+
+    public function getDetails(int $id)
+    {
+        $car = Car::find($id);
+        if(!$car) {
+            abort(404);
+        }
+
+        $carTime = CarTime::where('car_id', '=', $car->id)->firstOrFail();
+        $user = User::find($car->user_id);
+
+        return view('cars.details', [
+            'car' => $car,
+            'carTime' => $carTime,
+            'author' => $user,
+        ]);
     }
 
     private function getVehiclesTypes(): array

@@ -19,9 +19,13 @@ Route::get('/', [MainController::class, 'index'])
                 ->name('index')
                 ->middleware('auth');
 
-Route::get('/cars/add', [CarController::class, 'index'])
+Route::get('/car/add', [CarController::class, 'index'])
                 ->middleware('auth');
-Route::post('/cars/add', [CarController::class, 'addCar'])->name('add_car')
+Route::post('/car/add', [CarController::class, 'addCar'])->name('add_car')
                 ->middleware('auth');
+Route::get('/car/details/{id}', [CarController::class, 'getDetails'])
+                ->name('details')
+                ->middleware('auth');
+
 
 require __DIR__.'/auth.php';

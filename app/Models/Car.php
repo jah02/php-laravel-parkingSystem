@@ -8,9 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     use HasFactory;
-
-    public function getTime(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne('App\Models\CarTime');
-    }
 }
