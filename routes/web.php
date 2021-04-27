@@ -19,12 +19,20 @@ Route::get('/', [MainController::class, 'index'])
                 ->name('index')
                 ->middleware('auth');
 
-Route::get('/car/add', [CarController::class, 'index'])
+Route::get('/car/add', [CarController::class, 'getAdd'])
                 ->middleware('auth');
-Route::post('/car/add', [CarController::class, 'addCar'])->name('add_car')
+Route::post('/car/add', [CarController::class, 'add'])->name('add_car')
                 ->middleware('auth');
+
 Route::get('/car/details/{id}', [CarController::class, 'getDetails'])
                 ->name('details')
+                ->middleware('auth');
+
+Route::get('/car/update/{id}', [CarController::class, 'getUpdate'])
+                ->name('update_view')
+                ->middleware('auth');
+Route::post('/car/update/{id}', [CarController::class, 'update'])
+                ->name('update')
                 ->middleware('auth');
 
 

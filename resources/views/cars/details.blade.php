@@ -62,7 +62,7 @@
                                         <h5 id="hoursField">
                                             @if($carTime->departure_time)
                                                 <script>
-                                                    let hours = calculateHours({{ $carTime->arrival_time }}, {{ $carTime->departureTime }});
+                                                    let hours = calculateHours('{{ $carTime->arrival_time }}', '{{ $carTime->departure_time }}');
                                                     $('#hoursField').text(hours);
                                                 </script>
                                             @else
@@ -80,7 +80,7 @@
                                     <div class="col-7">
                                         <h5 id="costField">
                                             @if($carTime->cost)
-                                                {{ $carTime->cost }}
+                                                {{ $carTime->cost }} $
                                             @else
                                                 <script>
                                                     $('#costField').text(costAndHours['cost'] + ' $');
@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-secondary" onclick="window.history.back();">Back</button>
-                                <button type="button" class="btn btn-warning">Update</button>
+                                <a href="{{ route('update_view', ['id' => $car->id]) }}" class="btn btn-warning">Update</a>
                             </div>
                         </div>
                     </div>

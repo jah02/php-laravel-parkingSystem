@@ -25,7 +25,7 @@
                         <th scope="col">License plate</th>
                         <th scope="col">Vehicle type</th>
                         <th scope="col">Arrival time</th>
-                        @auth <th scope="col">Action</th> @endauth
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,12 +34,10 @@
                         <td>{{ $vehicle->license_plate }}</td>
                         <td>{{ $vehicle->vehicle_type }}</td>
                         <td>{{ $vehicle->arrival_time }}</td>
-                        @auth
-                            <td>
-                                <a href="{{ route('details', ['id' => $vehicle->car_id]) }}" class="btn btn-sm btn-info">Details</a>
-                                <a href="#" class="btn btn-sm btn-warning">Update</a>
-                            </td>
-                        @endauth
+                        <td>
+                            <a href="{{ route('details', ['id' => $vehicle->car_id]) }}" class="btn btn-sm btn-info">Details</a>
+                            <a href="{{ route('update_view', ['id' => $vehicle->car_id]) }}" class="btn btn-sm btn-warning">Update</a>
+                        </td>
                     </tr>
                     @endforeach
                     </tbody>
@@ -53,7 +51,7 @@
                         <th scope="col">Vehicle type</th>
                         <th scope="col">Arrive time</th>
                         <th scope="col">Departure time</th>
-                        @auth <th scope="col">Action</th> @endauth
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -63,12 +61,10 @@
                             <td>{{ $vehicle->vehicle_type }}</td>
                             <td>{{ $vehicle->arrival_time }}</td>
                             <td>{{ $vehicle->departure_time }}</td>
-                            @auth
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-info">Details</a>
-                                    <a href="#" class="btn btn-sm btn-warning">Update</a>
-                                </td>
-                            @endauth
+                            <td>
+                                <a href="#" class="btn btn-sm btn-info">Details</a>
+                                <a href="#" class="btn btn-sm btn-warning">Update</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
