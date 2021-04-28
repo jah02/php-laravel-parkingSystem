@@ -152,6 +152,9 @@ class CarController extends Controller
         $diff = $departureTime->diff($arrivalTime);
         $hours = $diff->h + ($diff->days*24);
 
+        if($hours == 0)
+            return round($pricePerHour*$types[$vehicleType], 2);
+
         return round($hours*$pricePerHour*$types[$vehicleType], 2);
     }
 }

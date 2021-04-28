@@ -48,7 +48,7 @@
                                         <h5 class="font-weight-bold">Departure time:</h5>
                                     </div>
                                     <div class="col-7">
-                                        <h5>{{ $carTime->departure_time === null ? "Currently parked" : $carTime->departure_time }}</h5>
+                                        <h5>{{ $carTime->departure_time === null ? "Currently parked in" : $carTime->departure_time }}</h5>
                                     </div>
                                 </div>
                                 @empty($carTime->departure_time)

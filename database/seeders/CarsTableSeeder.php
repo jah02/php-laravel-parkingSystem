@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use DateTime;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,12 +17,13 @@ class CarsTableSeeder extends Seeder
     public function run()
     {
         $date = new DateTime();
+        $userId = User::select('id')->get();
 
         for($i=0; $i<1000; $i++) {
             DB::table('cars')->insert([
                 'vehicle_type' => $this->getRandomVehicleType(),
                 'license_plate' => $this->getRandomLicensePlate(),
-                'user_id' => 1,
+                'user_id' => $userId[0]->id,
                 'created_at' => $date->format('Y-m-d H:i:s'),
                 'updated_at' => $date->format('Y-m-d H:i:s'),
             ]);

@@ -10,10 +10,10 @@ function calculateCurrentCostAndHours(vehicleType, arrivalTime) {
     let arrivalDate = new Date(arrivalTime);
     let nowDate = new Date();
 
-    let hours = Math.abs(nowDate - arrivalDate) / 36e5;
+    let hours = Math.ceil(Math.abs(nowDate - arrivalDate) / 36e5);
 
     return {
-        'cost': (hours * pricePerHour * types[vehicleType]).toFixed(2),
+        'cost': (hours * pricePerHour * types[`${vehicleType}`]).toFixed(2),
         'hours': hours,
     };
 }

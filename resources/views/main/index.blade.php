@@ -12,6 +12,8 @@
     var url_details = '{{ route('details', ['id' => 1]) }}';
     var url_update = '{{ route('update', ['id' => 1]) }}';
     var url_main = '{{ route('main') }}';
+    var url_searchMain = '{{ route('searchMain') }}';
+    var url_searchHistory = '{{ route('searchHistory') }}';
 </script>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="container">
@@ -28,33 +30,53 @@
                 </ul>
 
                 <!-- Main table -->
-                <table class="table" id="tableMain">
-                    <thead>
-                    <tr>
-                        <th scope="col">License plate</th>
-                        <th scope="col">Vehicle type</th>
-                        <th scope="col">Arrival time</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tableMainBody">
-                    @foreach($parkedVehicles as $vehicle)
-                    <tr>
-                        <td>{{ $vehicle->license_plate }}</td>
-                        <td>{{ $vehicle->vehicle_type }}</td>
-                        <td>{{ $vehicle->arrival_time }}</td>
-                        <td>
-                            <a href="{{ route('details', ['id' => $vehicle->car_id]) }}" class="btn btn-sm btn-info">Details</a>
-                            <a href="{{ route('update_view', ['id' => $vehicle->car_id]) }}" class="btn btn-sm btn-warning">Update</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                <span id="tableMain">
+                    <div class="container mb-3">
+                        <div class="row justify-content-end">
+                            <div class="col-8 col-md-5">
+                                <small class="text-muted">Search by license plate or arrival time</small>
+                                <input type="search" class="form-control" placeholder="Search" id="searchInputMain">
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">License plate</th>
+                            <th scope="col">Vehicle type</th>
+                            <th scope="col">Arrival time</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableMainBody">
+                        @foreach($parkedVehicles as $vehicle)
+                            <tr class="trMain">
+                                <td>{{ $vehicle->license_plate }}</td>
+                                <td>{{ $vehicle->vehicle_type }}</td>
+                                <td>{{ $vehicle->arrival_time }}</td>
+                                <td>
+                                    <a href="{{ route('details', ['id' => $vehicle->car_id]) }}" class="btn btn-sm btn-info">Details</a>
+                                    <a href="{{ route('update_view', ['id' => $vehicle->car_id]) }}" class="btn btn-sm btn-warning mt-1 mt-md-0">Update</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </span>
 
                 <!-- History table -->
                 <span id="tableHistory" hidden>
-                    <i class="bi bi-arrow-clockwise float-right mr-3" id="reloadHistory"></i>
+                    <div class="container mb-3">
+                        <div class="row justify-content-end">
+                            <div class="col-8 col-md-5">
+                                <small class="text-muted">Search by license plate or departure/arrival time</small>
+                                <input type="search" class="form-control" placeholder="Search" id="searchInputHistory">
+                            </div>
+                            <div class="col-2 col-md-1 pt-4">
+                                <i class="bi bi-arrow-clockwise mr-3" id="reloadHistory"></i>
+                            </div>
+                        </div>
+                    </div>
                     <table class="table">
                         <thead>
                         <tr>

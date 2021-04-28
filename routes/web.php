@@ -24,6 +24,12 @@ Route::post('/data/history', [MainController::class, 'getHistoryData'])
 Route::post('/data/main', [MainController::class, 'getMainData'])
                 ->name('main')
                 ->middleware('auth');
+Route::post('/data/search/main', [MainController::class, 'getSearchMainData'])
+                ->name('searchMain')
+                ->middleware('auth');
+Route::post('/data/search/history', [MainController::class, 'getSearchHistoryData'])
+                ->name('searchHistory')
+                ->middleware('auth');
 
 Route::get('/car/add', [CarController::class, 'getAdd'])
                 ->middleware('auth');
