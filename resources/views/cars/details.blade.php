@@ -97,8 +97,12 @@
                                         <h5>{{ $author->name }} ({{ $author->email }})</h5>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-secondary" onclick="window.history.back();">Back</button>
-                                <a href="{{ route('update_view', ['id' => $car->id]) }}" class="btn btn-warning">Update</a>
+                                @if($carTime->departure_time)
+                                    <a href="{{ route('index') }}" class="btn btn-secondary">Back</a>
+                                @else
+                                    <button type="button" class="btn btn-secondary" onclick="window.history.back()">Back</button>
+                                    <a href="{{ route('update_view', ['id' => $car->id]) }}" class="btn btn-warning">Update</a>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -79,6 +79,9 @@ class CarController extends Controller
         }
 
         $carTime = CarTime::where('car_id', '=', $car->id)->firstOrFail();
+        if($carTime->departure_time) {
+            abort(404);
+        }
 
         return view('cars.update', [
             'car' => $car,
@@ -106,7 +109,7 @@ class CarController extends Controller
         ]);
 
         $carTime = CarTime::where('car_id', '=', $id)->first();
-        if(!$carTime) {
+        if(!$carTime || $carTime->departure_time) {
             abort(404);
         }
 
@@ -116,7 +119,6 @@ class CarController extends Controller
         $car->save();
 
         $carTime->departure_time = str_replace('T', ' ', $request->departureTime);
-        echo $carTime->departure_time;
         $carTime->cost = $this->calculateCost(
             DateTime::createFromFormat('Y-m-d H:i:s', $carTime->arrival_time),
             DateTime::createFromFormat('Y-m-d H:i', $carTime->departure_time),
