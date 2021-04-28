@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'index'])
                 ->name('index')
                 ->middleware('auth');
+Route::post('/data/history', [MainController::class, 'getHistoryData'])
+                ->name('history')
+                ->middleware('auth');
+Route::post('/data/main', [MainController::class, 'getMainData'])
+                ->name('main')
+                ->middleware('auth');
 
 Route::get('/car/add', [CarController::class, 'getAdd'])
                 ->middleware('auth');
