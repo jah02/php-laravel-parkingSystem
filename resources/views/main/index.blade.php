@@ -84,7 +84,7 @@
                 </div>
 
                 <!-- Scroll button -->
-                <i class="bi bi-arrow-up-square-fill fixed-bottom ml-3" id="buttonToTop"></i>
+                <i class="bi bi-arrow-up-square-fill fixed-bottom ml-3" id="buttonToTop" hidden></i>
 
             </div>
         </div>
