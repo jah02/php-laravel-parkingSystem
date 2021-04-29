@@ -19,5 +19,9 @@ function calculateCurrentCostAndHours(vehicleType, arrivalTime) {
 }
 
 function calculateHours(arrivalTime, departureTime) {
-    return Math.ceil(Math.abs(new Date(departureTime) - new Date(arrivalTime)) / 36e5);
+    if(departureTime === arrivalTime) {
+        return 1;
+    } else {
+        return Math.ceil(Math.abs(new Date(departureTime) - new Date(arrivalTime)) / 36e5);
+    }
 }
