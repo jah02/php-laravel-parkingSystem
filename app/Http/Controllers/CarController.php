@@ -101,7 +101,7 @@ class CarController extends Controller
 
         $request->validate([
             'departureTime' => [
-                'required',
+                'nullable',
                 'date',
                 'after_or_equal:'.$carTime->arrival_time
             ],
@@ -122,12 +122,16 @@ class CarController extends Controller
         $car->license_plate = $request->licensePlate;
         $car->save();
 
-        $carTime->departure_time = str_replace('T', ' ', $request->departureTime);
-        $carTime->cost = $this->calculateCost(
-            DateTime::createFromFormat('Y-m-d H:i:s', $carTime->arrival_time),
-            DateTime::createFromFormat('Y-m-d H:i', $carTime->departure_time),
-            $car->vehicle_type
-        );
+        $carTime->departure_time = null;
+        $carTime->cost = null;
+        if($request->departureTime) {
+            $carTime->departure_time = str_replace('T', ' ', $request->departureTime);
+            $carTime->cost = $this->calculateCost(
+                DateTime::createFromFormat('Y-m-d H:i:s', $carTime->arrival_time),
+                DateTime::createFromFormat('Y-m-d H:i', $carTime->departure_time),
+                $car->vehicle_type
+            );
+        }
         $carTime->save();
 
         return redirect()->route('details', ['id' => $id]);
