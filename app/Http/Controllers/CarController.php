@@ -32,10 +32,12 @@ class CarController extends Controller
             ],
             'licensePlate' => [
                 'required',
+                'string',
                 'max:255'
             ],
             'arrivalTime' => [
                 'required',
+                'date',
                 'after_or_equal:now'
             ]
         ]);
@@ -92,10 +94,16 @@ class CarController extends Controller
 
     public function update(int $id, Request $request)
     {
+        $carTime = CarTime::where('car_id', '=', $id)->first();
+        if(!$carTime || $carTime->departure_time) {
+            abort(404);
+        }
+
         $request->validate([
             'departureTime' => [
                 'required',
-                'after_or_equal:now'
+                'date',
+                'after_or_equal:'.$carTime->arrival_time
             ],
             'vehicleType' => [
                 'required',
@@ -104,14 +112,10 @@ class CarController extends Controller
             ],
             'licensePlate' => [
                 'required',
+                'string',
                 'max:255'
             ],
         ]);
-
-        $carTime = CarTime::where('car_id', '=', $id)->first();
-        if(!$carTime || $carTime->departure_time) {
-            abort(404);
-        }
 
         $car = Car::find($id);
         $car->vehicle_type = $request->vehicleType;

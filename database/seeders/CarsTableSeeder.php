@@ -19,7 +19,7 @@ class CarsTableSeeder extends Seeder
         $date = new DateTime();
         $userId = User::select('id')->get();
 
-        for($i=0; $i<1000; $i++) {
+        for($i=0; $i<10000; $i++) {
             DB::table('cars')->insert([
                 'vehicle_type' => $this->getRandomVehicleType(),
                 'license_plate' => $this->getRandomLicensePlate(),

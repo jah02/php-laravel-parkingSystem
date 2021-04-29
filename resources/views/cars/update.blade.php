@@ -52,7 +52,12 @@
                                 <div class="form-group row mb-5">
                                     <label for="departureTime" class="col-4 col-md-3 col-form-label">Departure time</label>
                                     <div class="col-8 col-md-9">
-                                        <input type="datetime-local" class="form-control" name="departureTime" value="{{ str_replace(' ', 'T', $carTime->departure_time) }}">
+                                        <div class="input-group mb-3">
+                                            <input type="datetime-local" class="form-control" name="departureTime" value="{{ str_replace(' ', 'T', $carTime->departure_time) }}">
+                                            <div class="input-group-append">
+                                                <button type="button" class="btn btn-sm btn-primary" id="buttonDateNow">Now</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 @csrf
@@ -66,4 +71,13 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#buttonDateNow').on('click', function () {
+            let now = new Date();
+            now.setMinutes(now.getMinutes()+1 - now.getTimezoneOffset());
+            $('input[name=departureTime]').val(now.toISOString().slice(0,16));
+        });
+    });
+</script>
 @endsection

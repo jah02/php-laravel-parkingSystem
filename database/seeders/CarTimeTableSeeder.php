@@ -19,7 +19,7 @@ class CarTimeTableSeeder extends Seeder
     {
         $carIdList = Car::select('id')->get();
         $dateStart = 1614589200;
-        $dateEnd = 1619773200;
+        $dateEnd = 1619680205;
         $currentDate = new DateTime();
 
         for($i=0; $i<count($carIdList); $i++) {
@@ -30,7 +30,7 @@ class CarTimeTableSeeder extends Seeder
 
             //Rand departure time
             $departureDate = null;
-            if(rand(0, 1)) {
+            if(rand(0, 9) > 2) {
                 $departureDate = new DateTime();
                 $departureDate->setTimestamp(rand($arrivalTimestamp, $dateEnd));
             }

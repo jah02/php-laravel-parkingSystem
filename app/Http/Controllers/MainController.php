@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Models\Car;
 use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller

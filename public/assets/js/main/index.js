@@ -11,11 +11,11 @@ $(document).ready(function () {
     let errorTextObject = $('#errorText');
     let pageNumHistory = 1;
     let pageNumMain = 1;
-    let searchParams = new URLSearchParams(window.location.search);
     let endPageHistory = false;
     let endPageMain = false;
     let searchInputMain = $('#searchInputMain');
     let searchInputHistory = $('#searchInputHistory');
+    let searchMode = false;
 
     tabHistory.on('click', function () {
         tableMain.attr('hidden', true);
@@ -49,13 +49,16 @@ $(document).ready(function () {
     $('#reloadHistory').on('click', function () {
         $('#tableHistoryBody tr').remove();
         loadingWheel.attr('hidden', false);
-        if(endPageHistory) {
-            pageNumHistory = 1;
-        }
+        pageNumHistory = 1;
         doAjaxHistory();
     });
 
     $(window).scroll(function() {
+        //Search bar used
+        if(searchMode) {
+            return;
+        }
+
         if($(window).scrollTop() > 1200) {
             $('#buttonToTop').attr('hidden', false);
         } else {
@@ -90,16 +93,19 @@ $(document).ready(function () {
         let length = input.length;
 
         if(length > 2) {
+            searchMode = true;
             doSearchAjaxMain(input);
         } else {
+            searchMode = false;
             $('.trMain').attr('hidden', false);
             $('.trSearchMain').attr('hidden', true);
         }
     });
 
     //Prevent text remove bug
-    searchInputMain.change(function () {
+    searchInputMain.focusout(function () {
         if($(this).val().length === 0) {
+            searchMode = false;
             $('.trMain').attr('hidden', false);
             $('.trSearchMain').attr('hidden', true);
         }
@@ -110,16 +116,19 @@ $(document).ready(function () {
         let length = input.length;
 
         if(length > 2) {
+            searchMode = true;
             doSearchAjaxHistory(input);
         } else {
+            searchMode = false;
             $('.trHistory').attr('hidden', false);
             $('.trSearchHistory').attr('hidden', true);
         }
     });
 
     //Prevent text remove bug
-    searchInputHistory.change(function () {
+    searchInputHistory.focusout(function () {
         if($(this).val().length === 0) {
+            searchMode = false;
             $('.trHistory').attr('hidden', false);
             $('.trSearchHistory').attr('hidden', true);
         }
@@ -205,7 +214,7 @@ $(document).ready(function () {
 
                     $.each(data.vehiclesMain, function (i ,val) {
                         tableMainBody.append(
-                            '<tr>' +
+                            '<tr class="trMain">' +
                             `<td>${val.license_plate}</td>` +
                             `<td>${val.vehicle_type}</td>` +
                             `<td>${val.arrival_time}</td>` +

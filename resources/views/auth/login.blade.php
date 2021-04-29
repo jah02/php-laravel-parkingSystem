@@ -21,8 +21,7 @@
         <input type="password" name="password" class="form-control text-center" placeholder="Password" required>
     </div>
     <div class="form-group mb-4">
-        <input type="checkbox" name="remember-me">
-        <label for="remember_token">Remember me</label>
+        <label><input type="checkbox" name="remember"> Remember me</label>
     </div>
     @csrf
     <div class="text-center">

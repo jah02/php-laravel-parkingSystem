@@ -42,7 +42,12 @@
                                 <div class="form-group row mb-5">
                                     <label for="arrivalTime" class="col-4 col-md-3 col-form-label">Arrival time</label>
                                     <div class="col-8 col-md-9">
-                                        <input type="datetime-local" class="form-control" name="arrivalTime">
+                                        <div class="input-group mb-3">
+                                            <input type="datetime-local" class="form-control w-75" name="arrivalTime">
+                                            <div class="input-group-append">
+                                                <button type="button" class="btn btn-sm btn-primary" id="buttonDateNow">Now</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-secondary" onclick="window.history.back();">Back</button>
@@ -56,4 +61,13 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#buttonDateNow').on('click', function () {
+            let now = new Date();
+            now.setMinutes(now.getMinutes()+1 - now.getTimezoneOffset());
+            $('input[name=arrivalTime]').val(now.toISOString().slice(0,16));
+        });
+    });
+</script>
 @endsection
